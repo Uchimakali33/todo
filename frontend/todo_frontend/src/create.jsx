@@ -17,7 +17,7 @@ function Create(){
         else{
             const token=localStorage.getItem("token");
             try{
-                const response=await fetch("http://127.0.0.1:8000/delete",{
+                const response=await fetch("https://todo-2dd8.onrender.com/delete",{
                 method:"DELETE",
                 headers:{
                     "content-Type":"application/json",
@@ -56,7 +56,7 @@ function Create(){
         else{
             const token=localStorage.getItem("token")
             try{
-                const response=await fetch('http://127.0.0.1:8000/create',{
+                const response=await fetch('https://todo-2dd8.onrender.com/create',{
                     method:"POST",
                     headers:{
                         "Content-Type":"application/json",
@@ -86,7 +86,7 @@ function Create(){
     const showtask = async () => {
         const token = localStorage.getItem("token")
         try{
-            const response = await fetch("http://127.0.0.1:8000/show",{
+            const response = await fetch("https://todo-2dd8.onrender.com/show",{
                 method:"GET",
                 headers:{
                     "content-Type":"application/json",

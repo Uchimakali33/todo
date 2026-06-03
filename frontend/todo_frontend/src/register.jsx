@@ -22,7 +22,7 @@ function Register(){
 
 
         try{
-            Response=await fetch("http://127.0.0.1:8000/register",{
+            Response=await fetch("https://todo-2dd8.onrender.com/register",{
                 method:"POST",
                 headers:{"content-type":"application/json"},
                 body:JSON.stringify(registerdata)
