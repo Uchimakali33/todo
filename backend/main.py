@@ -29,15 +29,54 @@ oauth2_scheme=OAuth2PasswordBearer(tokenUrl="/login")
 load_dotenv()
 db_pass=os.getenv("db_pass")
 SECRET_KEY=os.getenv("SECRET_KEY")
+hostname=os.getenv("HOST")
+db_name=os.getenv("DB_NAME")
+userName=os.getenv("USER")
+port_no=os.getenv("PORT")
 
-def connect_db(name):
+def connect_db():
     return mysql.connector.connect(
-        host="localhost",
-        database=name,
-        user="root",
-        passwd=db_pass
+        host=hostname,
+        database=db_name,
+        user=userName,
+        passwd=db_pass,
+        port=port_no
     )
 
+
+def create_tables():
+
+    conn=connect_db()
+    cursor=conn.cursor()
+    try:
+        table1="""create table if not exists user(
+userid int auto_increment primary key,
+username varchar(45),
+pass varchar(64),
+log timestamp,
+salt varchar(32)
+);
+"""
+        table2="""create table if not exists todoList(
+userid int,
+task varchar(20)
+
+);"""
+
+        cursor.execute(table1)
+        cursor.execute(table2)
+        conn.commit()
+
+    except mysql.connector.Error as err:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="INTERNAL SERVER ERROR"
+        )
+    finally:
+        if cursor: cursor.close()
+        if conn: conn.close()
+
+    
 
 class LoginData(BaseModel):
     username:str
@@ -65,9 +104,12 @@ def register(payload:LoginData):
 
 
     try:
-        conn=connect_db("todo")
+        conn=connect_db()
         
         cursor=conn.cursor()
+        create_tables()
+
+        
         
 
         query1="select username from user where username=%s"
@@ -118,8 +160,9 @@ def login(payload:OAuth2PasswordRequestForm=Depends()):
         return hashed_password
 
     try:
-        conn=connect_db("todo")
+        conn=connect_db()
         cursor=conn.cursor()
+        create_tables()
 
         query1="select salt from user where username=%s"
         
@@ -159,7 +202,7 @@ def login(payload:OAuth2PasswordRequestForm=Depends()):
         
 
     except mysql.connector.Error as err:
-        print("loginn",err)
+        
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="INTERNAL SERVER ERROR"
@@ -205,7 +248,7 @@ def create_todo(task:TodoCreate,usercrediential:dict=Depends(get_current_user)):
     id=usercrediential["user_id"]
     
     try:
-        conn=connect_db("todo")
+        conn=connect_db()
         cursor=conn.cursor()
 
         query1="INSERT INTO todolist values(%s,%s)"
@@ -238,7 +281,7 @@ def show(usercrediential:dict=Depends(get_current_user)):
     cursor=None
 
     try:
-        conn=connect_db("todo")
+        conn=connect_db()
         cursor=conn.cursor()
 
         query1="select task from todolist where userid=%s"
@@ -272,7 +315,7 @@ def delete_todo(task:TodoCreate,usercredential:dict=Depends(get_current_user)):
     id=usercredential["user_id"]
 
     try:
-        conn=connect_db("todo")
+        conn=connect_db()
         cursor=conn.cursor()
 
 
