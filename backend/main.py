@@ -14,7 +14,7 @@ from jwtimp import create_access_token
 
 app=FastAPI()
 
-origins=["https://todo-xi-azure-85.vercel.app/"]
+origins=["https://todo-xi-azure-85.vercel.app"]
 
 app.add_middleware(
     CORSMiddleware,
