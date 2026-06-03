@@ -13,8 +13,9 @@ import mysql.connector
 from jwtimp import create_access_token
 
 app=FastAPI()
-
-origins=["https://todo-xi-azure-85.vercel.app"]
+load_dotenv()
+cors=os.getenv("CORS")
+origins=[cors]
 
 app.add_middleware(
     CORSMiddleware,
@@ -26,7 +27,7 @@ app.add_middleware(
 )
 
 oauth2_scheme=OAuth2PasswordBearer(tokenUrl="/login")
-load_dotenv()
+
 db_pass=os.getenv("db_pass")
 SECRET_KEY=os.getenv("SECRET_KEY")
 hostname=os.getenv("HOST")
