@@ -135,7 +135,7 @@ def register(payload:LoginData):
             }
     except mysql.connector.Error as err:
         conn.rollback()
-       
+        print("from register ",err)
         
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
