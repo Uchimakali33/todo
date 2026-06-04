@@ -226,7 +226,7 @@ def create_todo(task:TodoCreate,usercrediential:dict=Depends(get_current_user)):
         conn=connect_db()
         cursor=conn.cursor()
 
-        query1="INSERT INTO todolist values(%s,%s)"
+        query1="INSERT INTO todolist(userid,task) values(%s,%s)"
         cursor.execute(query1,(id,task.data))
 
         conn.commit()
