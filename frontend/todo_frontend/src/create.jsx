@@ -109,25 +109,25 @@ function Create(){
     return (
         <>
         <div className="bg-black/90 w-full min-h-screen flex flex-col items-center justify-center">
-            <div className="flex flex-col items-center bg-white/10 rounded-lg p-5">
-                <h1 className="text-2xl text-white font-mono">Welcome {JSON.parse(name)}, Let's Start building your day with todo's</h1>
+            <div className="flex flex-col w-105 sm:w-110 md:w-115 lg:w-120 items-center bg-white/10 rounded-lg p-5">
+                <h1 className="text-md sm:text-lg md:text-xl lg:text-2xl text-white font-mono">Welcome {JSON.parse(name)}, Let's Start building your day with todo's</h1>
 
-                <input type="text" onChange={(e)=>{setTask(e.target.value),setMessage("")}} className="w-105 mt-5 text-white border-2 text-lg font-sans rounded-lg border-emerald-400 hover:border-emerald-300 px-2 py-2 bg-white/10"/>
+                <input type="text" onChange={(e)=>{setTask(e.target.value),setMessage("")}} className="w-90 sm:w-95 md:100 lg:w-105 mt-5 text-white border-2 text-lg font-sans rounded-lg border-emerald-400 hover:border-emerald-300 px-2 py-2 bg-white/10"/>
                 <div className="button-row space-x-4">
-                    <button  className="border rounded-lg w-50 h-10 bg-emerald-400 border-black/30 text-xl text-white font-bold font-mono px-6 hover:border-black/20 active:scale-99 transition duration-100 hover:bg-emerald-500 mt-5" onClick={handlecreate}>create</button>
-                    <button className="bg-emerald-400 rounded-lg w-50 h-10 text-xl mt-5 text-white font-mono font-bold hover:bg-emerald-500 active:scale-99 transistion duration-100" onClick={deleteTask}>Delete</button>
+                    <button  className="border rounded-lg w-43 sm:w-45 md:w-47 lg:w-50 h-9 lg:h-10 bg-emerald-400 border-black/30 text-lg md:text-xl lg:text-2xl text-white font-bold font-mono px-6 hover:border-black/20 active:scale-99 transition duration-100 hover:bg-emerald-500 mt-5" onClick={handlecreate}>create</button>
+                    <button className="bg-emerald-400 rounded-lg w-43 sm:w-45 md:w-47 lg:w-50 h-9 lg:h-10 text-lg md:text-xl lg:text-2xl mt-5 text-white font-mono font-bold hover:bg-emerald-500 active:scale-99 transistion duration-100" onClick={deleteTask}>Delete</button>
                 </div>
                 <h1 className="text-white font-bold pt-4 text-xl">{message}</h1>
-                <button className="bg-red-600 rounded-lg w-50 h-10 text-xl mt-3 text-white font-mono font-bold hover:bg-red-700 active:scale-99 transistion duration-100" onClick={logout}>logout</button>
+                <button className="bg-red-600 rounded-lg w-43 sm:w-45 md:w-47 lg:w-50 h-9 lg:h-10 text-lg md:text-xl lg:text-2xl mt-3 text-white font-mono font-bold hover:bg-red-700 active:scale-99 transistion duration-100" onClick={logout}>logout</button>
                 
                 
             </div>
             <div className="text-center mt-8">
                 <h1 className="text-emerald-400 font-bold font-mono text-lg mt-2">To See the all task </h1>
-                <button className="bg-emerald-400 rounded-lg w-50 h-10 text-xl mt-2 text-white font-mono font-bold hover:bg-emerald-500 active:scale-99 transistion duration-100" onClick={showtask}>Show</button>
+                <button className="bg-emerald-400 rounded-lg w-43 sm:w-45 md:w-47 lg:w-50 h-9 lg:h-10 text-lg md:text-xl lg:text-xl mt-2 text-white font-mono font-bold hover:bg-emerald-500 active:scale-99 transistion duration-100" onClick={showtask}>Show</button>
             </div>
             <div className="mt-3">
-                <ol className="text-white text-xl font-mono m-2">
+                <ol className="text-white text-md md:text-lg lg:text-xl font-mono m-2">
                     {show.map((t)=><li key={t}>{t}</li>)}
                 </ol>
             </div>
