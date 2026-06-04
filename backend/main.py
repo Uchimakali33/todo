@@ -300,7 +300,7 @@ def delete_todo(task:TodoCreate,usercredential:dict=Depends(get_current_user)):
         print(user)
 
         if user:
-            query2="delete from todoList where userid=%s and task=%s"
+            query2="delete from todolist where userid=%s and task=%s"
             cursor.execute(query2,(id,task.data))
             conn.commit()
             return {
