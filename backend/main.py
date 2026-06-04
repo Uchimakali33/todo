@@ -15,7 +15,7 @@ from jwtimp import create_access_token
 app=FastAPI()
 load_dotenv()
 cors=os.getenv("CORS")
-origins=[cors]
+origins=[cors,"http://localhost:5173"]
 
 app.add_middleware(
     CORSMiddleware,
