@@ -10,7 +10,7 @@ function Home(){
             </div>
             <div className="">
                 <Link className="border rounded-lg mx-5 w-60 border-emerald-400 text-xl text-white font-mono py-2 px-6 hover:border-emerald-600 active:scale-99 transition duration-100 hover:bg-black/20 mt-3" to={"/login"}>Login</Link>
-                <Link className="border rounded-lg w-60 bg-emerald-400 border-black/30 text-xl text-white font-mono py-2 px-6 hover:border-black/20 active:scale-99 transition duration-100 hover:bg-emerald-500 mt-3" to={"/create"}>create account</Link>
+                <Link className="border rounded-lg w-60 bg-emerald-400 border-black/30 text-xl text-white font-mono py-2 px-6 hover:border-black/20 active:scale-99 transition duration-100 hover:bg-emerald-500 mt-3" to={"register"}>create account</Link>
             </div>
         </div>
         </>

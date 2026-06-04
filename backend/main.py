@@ -210,7 +210,7 @@ def login(payload:OAuth2PasswordRequestForm=Depends()):
         
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="INTERNAL SERVER ERROR"
+            detail=f"INTERNAL SERVER ERROR {err}"
         )
     
     finally:
