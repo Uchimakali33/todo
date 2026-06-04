@@ -45,40 +45,10 @@ def connect_db():
     )
 
 
-def create_tables():
 
-    conn=connect_db()
-    cursor=conn.cursor()
-    try:
-        table1="""create table if not exists SYSTEM_USER(
-userid int auto_increment primary key,
-username varchar(45),
-pass varchar(64),
-log timestamp,
-salt varchar(32)
-);
-"""
         
 
-        cursor.execute(table1)
-        conn.commit()
-        table2="""create table if not exists todolist(
-userid int,
-task varchar(20)
-
-);"""
-        cursor.execute(table2)
-        conn.commit()
-        
-
-    except mysql.connector.Error as err:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="INTERNAL SERVER ERROR"
-        )
-    finally:
-        if cursor: cursor.close()
-        if conn: conn.close()
+    
 
     
 
@@ -111,19 +81,19 @@ def register(payload:LoginData):
         conn=connect_db()
         
         cursor=conn.cursor()
-        create_tables()
+        
 
         
         
 
-        query1="select username from SYSTEM_USER where username=%s"
+        query1="select username from user where username=%s"
         cursor.execute(query1,(payload.username,))
 
         user=cursor.fetchone()
 
         if not user:
             curr_time=datetime.datetime.now()
-            query2="INSERT INTO SYSTEM_USER(username,pass,salt,log) VALUES(%s,%s,%s,%s);"
+            query2="INSERT INTO user(username,pass,salt,log) VALUES(%s,%s,%s,%s);"
             cursor.execute(query2,(payload.username,pass_hash,salt,curr_time))
             conn.commit()
             return {
@@ -167,9 +137,9 @@ def login(payload:OAuth2PasswordRequestForm=Depends()):
     try:
         conn=connect_db()
         cursor=conn.cursor()
-        create_tables()
+        
 
-        query1="select salt from SYSTEM_USER where username=%s"
+        query1="select salt from user where username=%s"
         
         cursor.execute(query1,(payload.username,))
 
@@ -179,7 +149,7 @@ def login(payload:OAuth2PasswordRequestForm=Depends()):
         if salt:
             pass_hash=hash_password(payload.password,salt)
             
-            query2="select * from SYSTEM_USER where username=%s and pass=%s"
+            query2="select * from user where username=%s and pass=%s"
             cursor.execute(query2,(payload.username,pass_hash.hex()))
 
             user=cursor.fetchone()
