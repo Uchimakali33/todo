@@ -141,6 +141,7 @@ def register(payload:LoginData):
         print("from register ",err)
         
         raise HTTPException(
+            TypeError=err
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Internal Database Error"
         )
