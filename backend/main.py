@@ -50,7 +50,7 @@ def create_tables():
     conn=connect_db()
     cursor=conn.cursor()
     try:
-        table1="""create table if not exists user(
+        table1="""create table if not exists SYSTEM_USER(
 userid int auto_increment primary key,
 username varchar(45),
 pass varchar(64),
@@ -116,14 +116,14 @@ def register(payload:LoginData):
         
         
 
-        query1="select username from user where username=%s"
+        query1="select username from SYSTEM_USER where username=%s"
         cursor.execute(query1,(payload.username,))
 
         user=cursor.fetchone()
 
         if not user:
             curr_time=datetime.datetime.now()
-            query2="INSERT INTO user(username,pass,salt,log) VALUES(%s,%s,%s,%s);"
+            query2="INSERT INTO SYSTEM_USER(username,pass,salt,log) VALUES(%s,%s,%s,%s);"
             cursor.execute(query2,(payload.username,pass_hash,salt,curr_time))
             conn.commit()
             return {
@@ -168,7 +168,7 @@ def login(payload:OAuth2PasswordRequestForm=Depends()):
         cursor=conn.cursor()
         create_tables()
 
-        query1="select salt from user where username=%s"
+        query1="select salt from SYSTEM_USER where username=%s"
         
         cursor.execute(query1,(payload.username,))
 
@@ -178,7 +178,7 @@ def login(payload:OAuth2PasswordRequestForm=Depends()):
         if salt:
             pass_hash=hash_password(payload.password,salt)
             
-            query2="select * from user where username=%s and pass=%s"
+            query2="select * from SYSTEM_USER where username=%s and pass=%s"
             cursor.execute(query2,(payload.username,pass_hash.hex()))
 
             user=cursor.fetchone()
