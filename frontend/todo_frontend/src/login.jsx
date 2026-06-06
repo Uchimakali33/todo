@@ -55,16 +55,20 @@ function login(){
     }
     
 
-    
 
     return (
-        <><div className=" bg-black/90 h-screen flex flex-col items-center pb-50">
-            <div className=" bg-black/90 w-77 sm:w-80 md:w-85 lg:w-90 h-100 rounded-lg text-center gap-4 mt-17">
-                <h1 className="text-emerald-400 font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl pt-2 sm:pt-4 md:pt-8 lg:pt-10">Login</h1>
-                <input className="border border-amber-50 rounded-lg px-2 text-black/70 text-sm sm:text-sm md:text-md lg:text-lg font-semibold w-57 sm:w-60 md:w-65 lg:w-70 h-10 bg-emerald-400 mt-7" placeholder="username" value={username} onChange={(e)=>setUsername(e.target.value)}></input>
-                <input className="border border-amber-50 rounded-lg px-2 text-black/70 text-sm sm:text-sm md:text-md lg:text-lg font-semibold md:w-65 w-57 sm:w-60 lg:w-70 h-10 bg-emerald-400 mt-4" placeholder="password" type="password" value={password} onChange={(e)=>setPassword(e.target.value)}></input>
-                <button className="bg-emerald-400 block w-57 sm:w-60 md:w-65 lg:w-70 h-8 text-black/80 font-bold text-md md:text-lg lg:text-xl mt-10 active:scale-102 transition duration-100 active:bg-emerald-500 active:text-black/70 rounded-lg ml-10 mb-2" onClick={handleSubmit} disabled={loading}><h1>{loading?"logging in":"Log in"}</h1></button>
-                <Link className="text-emerald-400 font-semibold pt-1" to={"/register"}>for new user register?</Link>
+        <><div className="bg-[#00092d] h-screen flex items-center justify-center">
+            <div className="grid grid-cols-1 bg-blue-900/20 w-70 sm:w-75 md:w-80 lg:w-85 h-74 sm:h-76 md:h-78 lg:h-80 rounded-4xl text-center">
+                
+                <div className="mt-6">
+                    <h1 className="ml-9 text-2xl text-start sm:text-xl md:text-2xl lg:text-3xl text-white font-bold font-mono">Login</h1>
+                    <input className="border border-gray-600 rounded-lg pr-5 sm:pr-6 md:pr-8 lg:pr-10 px-2 my-2 mx-1 md:mx-2 lg:mx-3 py-2 text-white/70 text-sm sm:text-sm md:text-md lg:text-lg font-semibold bg-[#00092d] focus:outline-none" placeholder="username" value={username} onChange={(e)=>setUsername(e.target.value)}></input>
+                    <input className="border border-gray-600 rounded-lg pr-5 sm:pr-6 md:pr-8 lg:pr-10 px-2 my-2 mx-1 md:mx-2 lg:mx-3 py-2 text-white/70 text-sm sm:text-sm md:text-md lg:text-lg font-semibold bg-[#00092d] focus:outline-none" placeholder="password" type="password" value={password} onChange={(e)=>setPassword(e.target.value)}></input>
+                </div>
+                <div className="h-20 flex flex-col justify-center items-center">
+                    <button className="bg-[#00092d] block px-10 sm:px-13 md:px-16 lg:px-20 h-10 text-white/80 font-bold text-md md:text-lg lg:text-xl active:scale-102 transition duration-100 active:bg-[#024b6d] active:text-white/70 rounded-lg mx-5" onClick={handleSubmit} disabled={loading}><h1>{loading?"logging in":"Log in"}</h1></button>
+                    <Link className="text-white/80 font-semibold py-1" to={"/register"}>for new user register?</Link>
+                </div>
 
                 
             </div>
